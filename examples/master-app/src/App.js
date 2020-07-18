@@ -1,18 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Microfrontend } from 'react-micro-frontend';
 import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>Master Application</header>
+    <div className='Main'>
+      <header className='Main-header'>Master Application</header>
 
-      <Microfrontend
-        name={'MicrofrontendApp1'}
-        host={'http://localhost:4001'}
-        pathname={'/'}
-      ></Microfrontend>
+      <div className='Main-content'>
+        <Microfrontend
+          name={'MicrofrontendApp1'}
+          host={'http://localhost:4000'}
+          pathname={'/'}
+        />
+
+        <Microfrontend
+          name={'MicrofrontendApp2'}
+          host={'http://localhost:4001'}
+          pathname={'/'}
+        />
+      </div>
     </div>
   );
 }

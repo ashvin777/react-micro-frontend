@@ -41,8 +41,6 @@ function injectStyle({ filePath, name, host, pathname }) {
 export default async function injectAssets({ manifest, name, host, pathname }) {
   let entrypoints = manifest?.entrypoints || [];
 
-  console.log('Injecting assets', entrypoints);
-
   for (let entry of entrypoints) {
     if (entry.match('.js')) {
       await injectScript({ filePath: entry, name, host, pathname });

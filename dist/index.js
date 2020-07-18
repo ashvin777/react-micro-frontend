@@ -25,7 +25,7 @@ function register(_ref) {
   window["mount".concat(name)] = function (containerId) {
     var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    _reactDom["default"].render(render(), document.getElementById(containerId));
+    _reactDom["default"].render(render(props), document.getElementById(containerId));
   };
 
   window["unmount".concat(name)] = function (containerId) {

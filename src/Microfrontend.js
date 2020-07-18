@@ -18,8 +18,8 @@ export default class Microfrontend extends PureComponent {
   };
 
   static defaultProps = {
-    loader: <div>Loading...</div>,
-    fallback: <div>Failed to load microfrontend, please try again</div>,
+    Loader: () => <div>Loading...</div>,
+    Fallback: () => <div>Failed to load microfrontend, please try again</div>,
     pathname: '/'
   };
 
@@ -27,7 +27,6 @@ export default class Microfrontend extends PureComponent {
     const { name, host, pathname } = this.props;
 
     try {
-      console.log(name, pathname);
       let { data: manifest } = await AssetsApi.getManifest(host, pathname);
       await AssetsInjector({ manifest, name, host, pathname });
 

@@ -83,14 +83,13 @@ var Microfrontend = /*#__PURE__*/function (_PureComponent) {
               case 0:
                 _this$props = this.props, name = _this$props.name, host = _this$props.host, pathname = _this$props.pathname;
                 _context.prev = 1;
-                console.log(name, pathname);
-                _context.next = 5;
+                _context.next = 4;
                 return _Assets2["default"].getManifest(host, pathname);
 
-              case 5:
+              case 4:
                 _yield$AssetsApi$getM = _context.sent;
                 manifest = _yield$AssetsApi$getM.data;
-                _context.next = 9;
+                _context.next = 8;
                 return (0, _Assets["default"])({
                   manifest: manifest,
                   name: name,
@@ -98,17 +97,17 @@ var Microfrontend = /*#__PURE__*/function (_PureComponent) {
                   pathname: pathname
                 });
 
-              case 9:
+              case 8:
                 this.setState({
                   loading: false,
                   loadingError: false
                 });
                 this.mountMicrofrontend();
-                _context.next = 18;
+                _context.next = 17;
                 break;
 
-              case 13:
-                _context.prev = 13;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](1);
                 this.setState({
                   loading: false,
@@ -117,12 +116,12 @@ var Microfrontend = /*#__PURE__*/function (_PureComponent) {
                 console.error('Failed to load assets of microfrontend - ', name);
                 console.error('Failed with error - ', _context.t0);
 
-              case 18:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[1, 13]]);
+        }, _callee, this, [[1, 12]]);
       }));
 
       function componentDidMount() {
@@ -199,7 +198,11 @@ _defineProperty(Microfrontend, "propTypes", {
 });
 
 _defineProperty(Microfrontend, "defaultProps", {
-  loader: /*#__PURE__*/_react["default"].createElement("div", null, "Loading..."),
-  fallback: /*#__PURE__*/_react["default"].createElement("div", null, "Failed to load microfrontend, please try again"),
+  Loader: function Loader() {
+    return /*#__PURE__*/_react["default"].createElement("div", null, "Loading...");
+  },
+  Fallback: function Fallback() {
+    return /*#__PURE__*/_react["default"].createElement("div", null, "Failed to load microfrontend, please try again");
+  },
   pathname: '/'
 });

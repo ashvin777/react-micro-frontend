@@ -1,15 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { register } from 'react-micro-frontend';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+register({
+  name: 'MicrofrontendApp1',
+  containerId: 'root',
+  render: (props) => (
+    <React.StrictMode>
+      <App {...props}/>
+    </React.StrictMode>
+  )
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
