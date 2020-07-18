@@ -13,9 +13,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var mfManifestFile = 'asset-manifest.json';
 
-function getManifest(mfHost) {
-  var url = _path["default"].join(mfHost, mfManifestFile);
+function getManifest(host, pathname) {
+  var url = host + _path["default"].join(pathname, mfManifestFile);
 
+  console.log('Calling ..', url);
   return _axios["default"].request({
     url: url,
     method: 'GET'

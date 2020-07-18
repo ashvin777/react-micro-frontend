@@ -22,7 +22,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 function injectScript(_ref) {
   var filePath = _ref.filePath,
       name = _ref.name,
-      host = _ref.host;
+      host = _ref.host,
+      pathname = _ref.pathname;
   var scriptId = "microfrontend-script-".concat(name, "-").concat(filePath);
 
   if (document.getElementById(scriptId)) {
@@ -33,7 +34,7 @@ function injectScript(_ref) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.id = scriptId;
-    script.src = _path["default"].join(host, filePath);
+    script.src = host + _path["default"].join(pathname, filePath);
     script.defer = true;
     script.async = true;
 
@@ -48,7 +49,8 @@ function injectScript(_ref) {
 function injectStyle(_ref2) {
   var filePath = _ref2.filePath,
       name = _ref2.name,
-      host = _ref2.host;
+      host = _ref2.host,
+      pathname = _ref2.pathname;
   var linkId = "microfrontend-style-".concat(name, "-").concat(filePath);
 
   if (document.getElementById(linkId)) {
@@ -59,7 +61,7 @@ function injectStyle(_ref2) {
   link.rel = 'stylesheet';
   link.type = 'text/css';
   link.id = linkId;
-  link.href = _path["default"].join(host, filePath);
+  link.href = host + _path["default"].join(pathname, filePath);
   document.head.appendChild(link);
 }
 
@@ -69,78 +71,81 @@ function injectAssets(_x) {
 
 function _injectAssets() {
   _injectAssets = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref3) {
-    var manifest, name, host, entrypoints, _iterator, _step, entry;
+    var manifest, name, host, pathname, entrypoints, _iterator, _step, entry;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            manifest = _ref3.manifest, name = _ref3.name, host = _ref3.host;
+            manifest = _ref3.manifest, name = _ref3.name, host = _ref3.host, pathname = _ref3.pathname;
             entrypoints = (manifest === null || manifest === void 0 ? void 0 : manifest.entrypoints) || [];
+            console.log('Injecting assets', entrypoints);
             _iterator = _createForOfIteratorHelper(entrypoints);
-            _context.prev = 3;
+            _context.prev = 4;
 
             _iterator.s();
 
-          case 5:
+          case 6:
             if ((_step = _iterator.n()).done) {
-              _context.next = 16;
+              _context.next = 17;
               break;
             }
 
             entry = _step.value;
 
             if (!entry.match('.js')) {
-              _context.next = 12;
+              _context.next = 13;
               break;
             }
 
-            _context.next = 10;
+            _context.next = 11;
             return injectScript({
               filePath: entry,
               name: name,
-              host: host
+              host: host,
+              pathname: pathname
             });
 
-          case 10:
-            _context.next = 14;
+          case 11:
+            _context.next = 15;
             break;
 
-          case 12:
-            _context.next = 14;
+          case 13:
+            _context.next = 15;
             return injectStyle({
               filePath: entry,
               name: name,
-              host: host
+              host: host,
+              pathname: pathname
             });
 
-          case 14:
-            _context.next = 5;
+          case 15:
+            _context.next = 6;
             break;
 
-          case 16:
-            _context.next = 21;
+          case 17:
+            _context.next = 22;
             break;
 
-          case 18:
-            _context.prev = 18;
-            _context.t0 = _context["catch"](3);
+          case 19:
+            _context.prev = 19;
+            _context.t0 = _context["catch"](4);
 
             _iterator.e(_context.t0);
 
-          case 21:
-            _context.prev = 21;
+          case 22:
+            _context.prev = 22;
 
             _iterator.f();
 
-            return _context.finish(21);
+            return _context.finish(22);
 
-          case 24:
+          case 25:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[3, 18, 21, 24]]);
+    }, _callee, null, [[4, 19, 22, 25]]);
   }));
   return _injectAssets.apply(this, arguments);
 }

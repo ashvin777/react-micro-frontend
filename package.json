@@ -2,7 +2,7 @@
   "name": "react-micro-frontend",
   "version": "0.0.1",
   "description": "Implement microfrontend using React",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build": "npx babel src -d dist --ignore '**/*/__tests__/*'",

@@ -3,9 +3,10 @@ import path from 'path';
 
 let mfManifestFile = 'asset-manifest.json';
 
-function getManifest(mfHost) {
-  let url = path.join(mfHost, mfManifestFile);
+function getManifest(host, pathname) {
+  let url = host + path.join(pathname, mfManifestFile);
 
+  console.log('Calling ..', url);
   return Axios.request({
     url,
     method: 'GET'

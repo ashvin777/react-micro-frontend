@@ -12,16 +12,24 @@ export default class Microfrontend extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     host: PropTypes.string.isRequired,
-    loader: PropTypes.element,
-    fallback: PropTypes.element
+    pathname: PropTypes.string,
+    Loader: PropTypes.element,
+    Fallback: PropTypes.element
+  };
+
+  static defaultProps = {
+    loader: <div>Loading...</div>,
+    fallback: <div>Failed to load microfrontend, please try again</div>,
+    pathname: '/'
   };
 
   async componentDidMount() {
-    const { name, host } = this.props;
+    const { name, host, pathname } = this.props;
 
     try {
-      let { data: manifest } = await AssetsApi.getManifest(host);
-      await AssetsInjector({ manifest, name, host });
+      console.log(name, pathname);
+      let { data: manifest } = await AssetsApi.getManifest(host, pathname);
+      await AssetsInjector({ manifest, name, host, pathname });
 
       this.setState({ loading: false, loadingError: false });
       this.mountMicrofrontend();
@@ -64,12 +72,12 @@ export default class Microfrontend extends PureComponent {
 
   render() {
     let { loading, loadingError } = this.state;
-    let { loader: Loader, fallback: Fallback } = this.props;
+    let { Loader, Fallback } = this.props;
 
     return (
       <main id={this.getContainerName()}>
-        {loading && Loader && <Loader />}
-        {loadingError && Fallback && <Fallback />}
+        {loading && Loader ? <Loader /> : null}
+        {loadingError && Fallback ? <Fallback /> : null}
       </main>
     );
   }

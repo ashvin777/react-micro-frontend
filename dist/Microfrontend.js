@@ -75,38 +75,40 @@ var Microfrontend = /*#__PURE__*/function (_PureComponent) {
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _this$props, name, host, _yield$AssetsApi$getM, manifest;
+        var _this$props, name, host, pathname, _yield$AssetsApi$getM, manifest;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this$props = this.props, name = _this$props.name, host = _this$props.host;
+                _this$props = this.props, name = _this$props.name, host = _this$props.host, pathname = _this$props.pathname;
                 _context.prev = 1;
-                _context.next = 4;
-                return _Assets2["default"].getManifest(host);
+                console.log(name, pathname);
+                _context.next = 5;
+                return _Assets2["default"].getManifest(host, pathname);
 
-              case 4:
+              case 5:
                 _yield$AssetsApi$getM = _context.sent;
                 manifest = _yield$AssetsApi$getM.data;
-                _context.next = 8;
+                _context.next = 9;
                 return (0, _Assets["default"])({
                   manifest: manifest,
                   name: name,
-                  host: host
+                  host: host,
+                  pathname: pathname
                 });
 
-              case 8:
+              case 9:
                 this.setState({
                   loading: false,
                   loadingError: false
                 });
                 this.mountMicrofrontend();
-                _context.next = 17;
+                _context.next = 18;
                 break;
 
-              case 12:
-                _context.prev = 12;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](1);
                 this.setState({
                   loading: false,
@@ -115,12 +117,12 @@ var Microfrontend = /*#__PURE__*/function (_PureComponent) {
                 console.error('Failed to load assets of microfrontend - ', name);
                 console.error('Failed with error - ', _context.t0);
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[1, 12]]);
+        }, _callee, this, [[1, 13]]);
       }));
 
       function componentDidMount() {
@@ -175,11 +177,11 @@ var Microfrontend = /*#__PURE__*/function (_PureComponent) {
           loading = _this$state.loading,
           loadingError = _this$state.loadingError;
       var _this$props2 = this.props,
-          Loader = _this$props2.loader,
-          Fallback = _this$props2.fallback;
+          Loader = _this$props2.Loader,
+          Fallback = _this$props2.Fallback;
       return /*#__PURE__*/_react["default"].createElement("main", {
         id: this.getContainerName()
-      }, loading && Loader && /*#__PURE__*/_react["default"].createElement(Loader, null), loadingError && Fallback && /*#__PURE__*/_react["default"].createElement(Fallback, null));
+      }, loading && Loader ? /*#__PURE__*/_react["default"].createElement(Loader, null) : null, loadingError && Fallback ? /*#__PURE__*/_react["default"].createElement(Fallback, null) : null);
     }
   }]);
 
@@ -191,6 +193,13 @@ exports["default"] = Microfrontend;
 _defineProperty(Microfrontend, "propTypes", {
   name: _propTypes["default"].string.isRequired,
   host: _propTypes["default"].string.isRequired,
-  loader: _propTypes["default"].element,
-  fallback: _propTypes["default"].element
+  pathname: _propTypes["default"].string,
+  Loader: _propTypes["default"].element,
+  Fallback: _propTypes["default"].element
+});
+
+_defineProperty(Microfrontend, "defaultProps", {
+  loader: /*#__PURE__*/_react["default"].createElement("div", null, "Loading..."),
+  fallback: /*#__PURE__*/_react["default"].createElement("div", null, "Failed to load microfrontend, please try again"),
+  pathname: '/'
 });
