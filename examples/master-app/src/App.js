@@ -1,5 +1,5 @@
 import React from 'react';
-import { Microfrontend } from 'react-micro-frontend';
+import { Microfrontend } from 'react-mfe';
 import './App.css';
 
 function App() {
