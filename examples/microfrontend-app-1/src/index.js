@@ -1,5 +1,5 @@
 import React from 'react';
-import { register } from 'react-micro-frontend';
+import { register } from 'react-mfe';
 
 import './index.css';
 import App from './App';
